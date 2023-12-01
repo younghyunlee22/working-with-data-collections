@@ -71,3 +71,16 @@ for (let i = 1; i < rows.length; i++) {
 }
 
 console.log("Array of Objects", arrObjectPeople);
+
+// Part 4
+
+let keysMapped = arrObjectPeople.map((item) => {
+  return {
+    id: item.ID,
+    name: item.Name,
+    occupation: item.Occupation,
+    age: item.Age,
+  };
+});
+
+console.log("Mapped keys to small cases", keysMapped);
