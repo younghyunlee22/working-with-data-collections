@@ -8,7 +8,7 @@ splitString.forEach((string) => {
   twodArray.push(string.split(","));
 });
 
-console.log(twodArray);
+console.log("1", twodArray);
 
 // using a for loop
 let arrRows = csvData.split("\n");
@@ -20,7 +20,7 @@ for (let i = 0; i < arrRows.length; i++) {
   arrResult.push(currentRow.split(","));
 }
 
-console.log(arrResult);
+console.log("2", arrResult);
 
 // Part 2
 /**
@@ -50,4 +50,24 @@ for (let i = 0; i < rows.length; i++) {
   arrDataTwoD.push(innerArray);
 }
 
-console.log(arrDataTwoD);
+console.log("3", arrDataTwoD);
+
+// Part 3
+let heading = rows[0];
+let arrHeading = heading.split(",");
+console.log("Heading", arrHeading);
+
+const columnHeaders = rows[0].split(",");
+
+let arrObjectPeople = [];
+for (let i = 1; i < rows.length; i++) {
+  let columnData = rows[i].split(",");
+  let dataObject = {};
+  for (let j = 0; j < columnHeaders.length; j++) {
+    const key = columnHeaders[j];
+    dataObject[key] = columnData[j];
+  }
+  arrObjectPeople.push(dataObject);
+}
+
+console.log("Array of Objects", arrObjectPeople);
