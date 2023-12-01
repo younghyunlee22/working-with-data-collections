@@ -8,7 +8,7 @@ splitString.forEach((string) => {
   twodArray.push(string.split(","));
 });
 
-console.log("1", twodArray);
+console.log("===Solution 1===", twodArray);
 
 // using a for loop
 let arrRows = csvData.split("\n");
@@ -20,7 +20,7 @@ for (let i = 0; i < arrRows.length; i++) {
   arrResult.push(currentRow.split(","));
 }
 
-console.log("2", arrResult);
+console.log("===Solution 2===", arrResult);
 
 // Part 2: Expanding Functionality
 /**
@@ -52,7 +52,7 @@ for (let i = 0; i < rows.length; i++) {
   arrDataTwoD.push(innerArray);
 }
 
-console.log("3", arrDataTwoD);
+console.log("==Solution 3==", arrDataTwoD);
 
 // Part 3
 let heading = rows[0];
@@ -86,7 +86,7 @@ Since the heading for each column will be stored in the object keys, you do not 
 Important: While this functionality can be built into the original CSV parser you built in Part 2, we are intentionally creating two different algorithms to test different skillsets. Please leave these sections separate even if it would be more efficient to combine them.
  */
 
-let keysMapped = arrObjectPeople.map((item) => {
+let arrObjectPeopleSmallCaseHeaders = arrObjectPeople.map((item) => {
   return {
     id: item.ID,
     name: item.Name,
@@ -95,7 +95,7 @@ let keysMapped = arrObjectPeople.map((item) => {
   };
 });
 
-console.log("Mapped keys to small cases", keysMapped);
+console.log("Mapped keys to small cases", arrObjectPeopleSmallCaseHeaders);
 
 // Part 4: Sorting and Manipulating Data
 /**
@@ -104,22 +104,22 @@ Using array methods, accomplish the following tasks, in order upon the result of
  */
 
 // 1. Remove the last element from the sorted array.
-keysMapped.pop();
+arrObjectPeopleSmallCaseHeaders.pop();
 // 2. Insert the following object at index 1:
 let newObjectAt = { id: "48", name: "Barry", occupation: "Runner", age: "25" };
-keysMapped.splice(1, 0, newObjectAt);
+arrObjectPeopleSmallCaseHeaders.splice(1, 0, newObjectAt);
 // 3. Add the following object to the end of the array:
 let newObjectLast = { id: "7", name: "Bilbo", occupation: "None", age: "111" };
-keysMapped.push(newObjectLast);
+arrObjectPeopleSmallCaseHeaders.push(newObjectLast);
 
-// console.log("Part4", keysMapped);
+// console.log("Part4", arrObjectPeopleSmallCaseHeaders);
 
 // 4. Finally, use the values of each object within the array and the array’s length property to calculate the average age of the group. This calculation should be accomplished using a loop.
 
 let sum = 0;
-const arrSize = keysMapped.length;
+const arrSize = arrObjectPeopleSmallCaseHeaders.length;
 for (let i = 0; i < arrSize; i++) {
-  const age = parseInt(keysMapped[i].age);
+  const age = parseInt(arrObjectPeopleSmallCaseHeaders[i].age);
   sum += age;
 }
 const average = sum / arrSize;
@@ -130,3 +130,22 @@ console.log("The average of the ages is :", average);
 As a final task, transform the final set of data back into CSV format.
 There are a number of ways to do this; be creative!
  */
+
+// solution 1
+let cvsColumnHeaders = Object.keys(arrObjectPeopleSmallCaseHeaders[0]);
+
+let csvHeader = cvsColumnHeaders.join(",");
+
+let csvRows = arrObjectPeopleSmallCaseHeaders.map((obj) =>
+  cvsColumnHeaders.map((key) => obj[key]).join(",")
+);
+
+let csvString = [csvHeader, ...csvRows].join("\n");
+
+console.log("Solution 1 ", csvString);
+
+// solution 2
+const csvString2 = arrObjectPeopleSmallCaseHeaders
+  .map((row) => Object.values(row).join(","))
+  .join("\n");
+console.log("Solution 2: ", csvString2);
